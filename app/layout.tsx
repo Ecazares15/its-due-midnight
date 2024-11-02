@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+import "./globals.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import React from "react";
+import Image from "next/image";
+import { Pixelify_Sans } from "next/font/google";
+
+const pixelifySans = Pixelify_Sans({
+  weight: "400",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -25,10 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={pixelifySans.className}>
+        <Image
+          alt="Background"
+          className="-z-10 object-cover"
+          layout="fill"
+          quality={100}
+          src="/background.png"
+        />
+        <AntdRegistry>{children}</AntdRegistry>
       </body>
     </html>
   );
